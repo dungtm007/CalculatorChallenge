@@ -19,7 +19,7 @@ namespace CalculatorApp
 
         private void SetupInternalParsers()
         {
-            int supportedNumberOfOperands = 2;
+            int supportedNumberOfOperands = 1;
             _firstInputParser = new CommaDelimiterParser(supportedNumberOfOperands);
         }
 

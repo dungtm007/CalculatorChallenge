@@ -9,7 +9,7 @@ namespace CalculatorApp.Internal.Concrete
 
         public CommaDelimiterParser(int supportedNumberOfOperands)
         {
-            SupportedNumberOfOperands = supportedNumberOfOperands; // -1 means unlimited
+            SupportedNumberOfOperands = supportedNumberOfOperands; // -1, 0, 1 all mean unlimited
         }
 
         public override List<int> Parse(string input)
@@ -42,9 +42,12 @@ namespace CalculatorApp.Internal.Concrete
             foreach (var operand in operands)
             {                
                 yield return operand;
-                if (++count == SupportedNumberOfOperands)
+                if (SupportedNumberOfOperands > 1) // less than or equal to 1 means supporting unlimited numbers 
                 {
-                    break;
+                    if (++count == SupportedNumberOfOperands)
+                    {
+                        break;
+                    }
                 }
             }
         }
