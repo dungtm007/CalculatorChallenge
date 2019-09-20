@@ -12,6 +12,16 @@ namespace CalculatorApp.Internal.Abstract
     public abstract class InputParser
     {
         public InputParser NextInputParser { get; set; }
-        public abstract List<int> Parse(string input);
+        public abstract List<int> Parse(string input);  
+        public List<int> ParseOrPassToNextInputParserIfNeeded(string input)
+        {
+            List<int> numbers = Parse(input);
+            if (numbers.Count == 0 // tried but unsuccessfully parse the input
+                && NextInputParser != null)
+            {
+                numbers = NextInputParser.Parse(input);
+            }
+            return numbers;
+        }
     }
 }

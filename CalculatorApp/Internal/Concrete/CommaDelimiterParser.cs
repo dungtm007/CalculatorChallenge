@@ -25,12 +25,6 @@ namespace CalculatorApp.Internal.Concrete
                 numbers.Add(number);
             }
 
-            if (numbers.Count == 0 // tried but unsuccessfully parse the input
-                && NextInputParser != null)
-            {
-                numbers = NextInputParser.Parse(input);
-            }
-
             return numbers;
         }
 

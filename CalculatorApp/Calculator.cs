@@ -1,5 +1,6 @@
 ﻿using CalculatorApp.Internal.Abstract;
 using CalculatorApp.Internal.Concrete;
+using CalculatorApp.Validators;
 using System;
 using System.Linq;
 
@@ -7,14 +8,17 @@ namespace CalculatorApp
 {
     public class Calculator
     {
-        public string Input { get; private set; }
+        public string Input { get; set; }
 
         private InputParser _firstInputParser;
         private InputParser _secondInputParser;
 
-        public Calculator()
+        private readonly INumberValidator _numberValidator;
+
+        public Calculator(INumberValidator numberValidator)
         {
             SetupInternalParsers();
+            _numberValidator = numberValidator;
         }
 
         private void SetupInternalParsers()
@@ -33,7 +37,11 @@ namespace CalculatorApp
 
         public void Calculate()
         {
-            var numbers = _firstInputParser.Parse(Input);
+            var numbers = _firstInputParser.ParseOrPassToNextInputParserIfNeeded(Input);
+            if (!_numberValidator.IsValid(numbers))
+            {
+                throw new ArgumentException($"{_numberValidator.ViolatedConditionName}: {string.Join(',', _numberValidator.InvalidNumbers)}");
+            }
             var sumResult = numbers.Sum();
             Console.WriteLine($"Result: {sumResult}");
         }
