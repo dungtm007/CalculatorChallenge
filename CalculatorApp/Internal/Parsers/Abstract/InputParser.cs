@@ -16,7 +16,7 @@ namespace CalculatorApp.Internal.Parsers.Abstract
         public List<int> ParseOrPassToNextInputParserIfNeeded(string input)
         {
             List<int> numbers = Parse(input);
-            if (numbers.Count == 0 // tried but unsuccessfully parse the input
+            if ((numbers == null || numbers.Count == 0) // tried but unsuccessfully parse the input
                 && NextInputParser != null)
             {
                 numbers = NextInputParser.Parse(input);

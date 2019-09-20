@@ -11,8 +11,9 @@ namespace CalculatorApp
     {
         public string Input { get; set; }
 
-        private InputParser _firstInputParser;
-        private InputParser _secondInputParser;
+        private InputParser _inputParser1;
+        private InputParser _inputParser2;
+        private InputParser _inputParser3;
 
         private readonly INumberValidator _numberValidator;
         private readonly INumberFilter _numberFilter;
@@ -27,9 +28,12 @@ namespace CalculatorApp
 
         private void SetupInternalParsers()
         {
-            _firstInputParser = new DifferentDelimitersParser(supportedDelimiters: new string[] { ",", "\\n" });
-            _secondInputParser = new CommaDelimiterParser(supportedNumberOfOperands: -1);
-            _firstInputParser.NextInputParser = _secondInputParser;
+            _inputParser1 = new OneCustomSingleCharacterDelimiterParser();
+            _inputParser2 = new DifferentDelimitersParser(supportedDelimiters: new string[] { ",", "\\n" });
+            _inputParser3 = new CommaDelimiterParser(supportedNumberOfOperands: -1);
+
+            _inputParser1.NextInputParser = _inputParser2;
+            _inputParser2.NextInputParser = _inputParser3;
         }
 
         public void ReadInput()
@@ -41,7 +45,7 @@ namespace CalculatorApp
 
         public void Calculate()
         {
-            var numbers = _firstInputParser.ParseOrPassToNextInputParserIfNeeded(Input);
+            var numbers = _inputParser1.ParseOrPassToNextInputParserIfNeeded(Input);
 
             if (!_numberValidator.IsValid(numbers))
             {
