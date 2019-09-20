@@ -1,8 +1,8 @@
-﻿using CalculatorApp.Validators;
+﻿using CalculatorApp.Internal.Filters;
+using CalculatorApp.Internal.Validators;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace CalculatorApp.UnitTests
@@ -17,7 +17,10 @@ namespace CalculatorApp.UnitTests
             validator.ViolatedConditionName.Returns("Negative Number");
             List<int> testNumbers = new List<int>() { 9, -2, 25, -66, -14 };
             validator.InvalidNumbers.Returns(testNumbers.FindAll(n => n < 0));
-            Calculator calculator = new Calculator(validator);
+
+            var filter = Substitute.For<INumberFilter>();
+
+            Calculator calculator = new Calculator(validator, filter);
             calculator.Input = "Test";
 
             var exception = Record.Exception(() => calculator.Calculate());

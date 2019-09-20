@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CalculatorApp.Internal.Abstract
+namespace CalculatorApp.Internal.Parsers.Abstract
 {
     /// <summary>
     /// Pattern: Chain of responsibility.

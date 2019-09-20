@@ -1,9 +1,9 @@
 
-using CalculatorApp.Internal.Concrete;
+using CalculatorApp.Internal.Parsers.Concrete;
 using System.Linq;
 using Xunit;
 
-namespace CalculatorApp.UnitTests.Internal.Concrete
+namespace CalculatorApp.UnitTests.Internal.Parsers.Concrete
 {
     public class CommaDelimiterParserTests
     {

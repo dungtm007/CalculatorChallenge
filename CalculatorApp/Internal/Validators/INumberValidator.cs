@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CalculatorApp.Validators
+namespace CalculatorApp.Internal.Validators
 {
     public interface INumberValidator
     {

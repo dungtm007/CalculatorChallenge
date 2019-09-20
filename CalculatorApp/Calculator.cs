@@ -1,6 +1,7 @@
-﻿using CalculatorApp.Internal.Abstract;
-using CalculatorApp.Internal.Concrete;
-using CalculatorApp.Validators;
+﻿using CalculatorApp.Internal.Filters;
+using CalculatorApp.Internal.Parsers.Abstract;
+using CalculatorApp.Internal.Parsers.Concrete;
+using CalculatorApp.Internal.Validators;
 using System;
 using System.Linq;
 
@@ -14,11 +15,14 @@ namespace CalculatorApp
         private InputParser _secondInputParser;
 
         private readonly INumberValidator _numberValidator;
+        private readonly INumberFilter _numberFilter;
 
-        public Calculator(INumberValidator numberValidator)
+        public Calculator(INumberValidator numberValidator, INumberFilter numberFilter)
         {
             SetupInternalParsers();
+
             _numberValidator = numberValidator;
+            _numberFilter = numberFilter;
         }
 
         private void SetupInternalParsers()
@@ -38,11 +42,17 @@ namespace CalculatorApp
         public void Calculate()
         {
             var numbers = _firstInputParser.ParseOrPassToNextInputParserIfNeeded(Input);
+
             if (!_numberValidator.IsValid(numbers))
             {
-                throw new ArgumentException($"{_numberValidator.ViolatedConditionName}: {string.Join(',', _numberValidator.InvalidNumbers)}");
+                throw new ArgumentException(
+                    $"{_numberValidator.ViolatedConditionName}: {string.Join(',', _numberValidator.InvalidNumbers)}");
             }
-            var sumResult = numbers.Sum();
+
+            var finalNumbers = _numberFilter.Filter(numbers);
+
+            var sumResult = finalNumbers.Sum();
+
             Console.WriteLine($"Result: {sumResult}");
         }
     }

@@ -1,7 +1,7 @@
-﻿using CalculatorApp.Internal.Abstract;
+﻿using CalculatorApp.Internal.Parsers.Abstract;
 using System.Collections.Generic;
 
-namespace CalculatorApp.Internal.Concrete
+namespace CalculatorApp.Internal.Parsers.Concrete
 {
     public class CommaDelimiterParser : InputParser
     {

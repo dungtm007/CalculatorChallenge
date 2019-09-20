@@ -1,10 +1,10 @@
-﻿using CalculatorApp.Validators;
+﻿using CalculatorApp.Internal.Validators;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace CalculatorApp.UnitTests.Validators
+namespace CalculatorApp.UnitTests.Internal.Validators
 {
     public class PositiveNumberValidatorTests
     {

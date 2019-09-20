@@ -1,9 +1,9 @@
-﻿using CalculatorApp.Internal.Abstract;
+﻿using CalculatorApp.Internal.Parsers.Abstract;
 using NSubstitute;
 using System.Collections.Generic;
 using Xunit;
 
-namespace CalculatorApp.UnitTests.Internal.Abstract
+namespace CalculatorApp.UnitTests.Internal.Parsers.Abstract
 {
     public class InputParserTests
     {

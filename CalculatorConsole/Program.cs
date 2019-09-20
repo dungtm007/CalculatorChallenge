@@ -1,5 +1,6 @@
 ﻿using CalculatorApp;
-using CalculatorApp.Validators;
+using CalculatorApp.Internal.Filters;
+using CalculatorApp.Internal.Validators;
 using System;
 
 namespace CalculatorConsole
@@ -8,29 +9,30 @@ namespace CalculatorConsole
     {
         static void Main(string[] args)
         {
+            Calculator calculator = new Calculator(new PositiveNumberValidator(), new LessThanOrEqual1000NumberFilter());
+
             char wantToRetry;
 
-            try
+            do
             {
-                do
+                try
                 {
-                    Calculator calculator = new Calculator(new PositiveNumberValidator());
                     calculator.ReadInput();
                     calculator.Calculate();
-
-                    Console.Write("Want to retry (n/N to stop; anything to continue)? ");
-                    wantToRetry = Console.ReadKey().KeyChar;
                 }
-                while (!wantToRetry.Equals('n') && !wantToRetry.Equals('N'));
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                }
 
-                Console.WriteLine();
-                Console.WriteLine("Exiting the program...");
-                Console.ReadKey();
+                Console.Write("Want to retry (n/N to stop; anything to continue)? ");
+                wantToRetry = Console.ReadKey().KeyChar;
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex.Message}");
-            }
+            while (!wantToRetry.Equals('n') && !wantToRetry.Equals('N'));
+
+            Console.WriteLine();
+            Console.WriteLine("Exiting the program...");
+            Console.ReadKey();
         }
     }
 }

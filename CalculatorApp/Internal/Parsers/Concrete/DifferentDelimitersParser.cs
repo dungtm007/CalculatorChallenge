@@ -1,8 +1,8 @@
-﻿using CalculatorApp.Internal.Abstract;
+﻿using CalculatorApp.Internal.Parsers.Abstract;
 using System;
 using System.Collections.Generic;
 
-namespace CalculatorApp.Internal.Concrete
+namespace CalculatorApp.Internal.Parsers.Concrete
 {
     public class DifferentDelimitersParser : InputParser
     {
