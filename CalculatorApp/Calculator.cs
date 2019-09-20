@@ -19,8 +19,9 @@ namespace CalculatorApp
 
         private void SetupInternalParsers()
         {
-            int supportedNumberOfOperands = 1;
-            _firstInputParser = new CommaDelimiterParser(supportedNumberOfOperands);
+            _firstInputParser = new DifferentDelimitersParser(supportedDelimiters: new string[] { ",", "\\n" });
+            _secondInputParser = new CommaDelimiterParser(supportedNumberOfOperands: -1);
+            _firstInputParser.NextInputParser = _secondInputParser;
         }
 
         public void ReadInput()

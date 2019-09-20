@@ -21,10 +21,8 @@ namespace CalculatorApp.Internal.Concrete
             foreach (var operand in FilterSupportedNumberOfOperands(parsedOperands))
             {
                 int number;
-                if (int.TryParse(operand, out number))
-                {
-                    numbers.Add(number);
-                }
+                int.TryParse(operand, out number);
+                numbers.Add(number);
             }
 
             if (numbers.Count == 0 // tried but unsuccessfully parse the input
