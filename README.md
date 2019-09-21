@@ -51,6 +51,10 @@ Calculator Challenge - Coding Practice
      
       ![calculator stretch goal 1](https://i.ibb.co/HHH0Vh8/calculator-stretch-1.png)
       
-      
+  **Stretch goal 2. Commit for stretch goal 2:** Allow the application to process entered entries until Ctrl+C is used
+  * Actually this task is simple. Because the default behavior of Windows console is always stop whenever Ctrl+C is pressed. Therefore, the code change in this commit make the code cleaner with a simple while(true) loop
+  * A final testing also makes sure all required formats are supported well:
+  
+      ![calculator stretch goal 2](https://i.ibb.co/LhTyN7F/calculator-stretch-2.png)
       
   
