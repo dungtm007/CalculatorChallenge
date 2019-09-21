@@ -14,6 +14,7 @@ namespace CalculatorApp
         private InputParser _inputParser1;
         private InputParser _inputParser2;
         private InputParser _inputParser3;
+        private InputParser _inputParser4;
 
         private readonly INumberValidator _numberValidator;
         private readonly INumberFilter _numberFilter;
@@ -28,12 +29,14 @@ namespace CalculatorApp
 
         private void SetupInternalParsers()
         {
-            _inputParser1 = new OneCustomSingleCharacterDelimiterParser();
-            _inputParser2 = new DifferentDelimitersParser(supportedDelimiters: new string[] { ",", "\\n" });
-            _inputParser3 = new CommaDelimiterParser(supportedNumberOfOperands: -1);
+            _inputParser1 = new OneCustomVariableLengthDelimiterParser();
+            _inputParser2 = new OneCustomSingleCharacterDelimiterParser();
+            _inputParser3 = new DifferentDelimitersParser(supportedDelimiters: new string[] { ",", "\\n" });
+            _inputParser4 = new CommaDelimiterParser(supportedNumberOfOperands: -1);
 
             _inputParser1.NextInputParser = _inputParser2;
             _inputParser2.NextInputParser = _inputParser3;
+            _inputParser3.NextInputParser = _inputParser4;
         }
 
         public void ReadInput()
@@ -43,7 +46,7 @@ namespace CalculatorApp
             Input = Console.ReadLine();
         }
 
-        public void Calculate()
+        public int Calculate()
         {
             var numbers = _inputParser1.ParseOrPassToNextInputParserIfNeeded(Input);
 
@@ -55,9 +58,11 @@ namespace CalculatorApp
 
             var finalNumbers = _numberFilter.Filter(numbers);
 
-            var sumResult = finalNumbers.Sum();
+            var sumResult = finalNumbers?.Sum() ?? 0;
 
             Console.WriteLine($"Result: {sumResult}");
+
+            return sumResult;
         }
     }
 }

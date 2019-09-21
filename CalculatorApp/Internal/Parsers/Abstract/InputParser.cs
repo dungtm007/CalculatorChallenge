@@ -19,7 +19,7 @@ namespace CalculatorApp.Internal.Parsers.Abstract
             if ((numbers == null || numbers.Count == 0) // tried but unsuccessfully parse the input
                 && NextInputParser != null)
             {
-                numbers = NextInputParser.Parse(input);
+                numbers = NextInputParser.ParseOrPassToNextInputParserIfNeeded(input);
             }
             return numbers;
         }

@@ -1,4 +1,3 @@
-
 using CalculatorApp.Internal.Parsers.Concrete;
 using System.Linq;
 using Xunit;

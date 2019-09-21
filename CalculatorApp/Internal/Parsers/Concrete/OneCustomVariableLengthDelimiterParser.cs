@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace CalculatorApp.Internal.Parsers.Concrete
 {
-    public class OneCustomSingleCharacterDelimiterParser : InputParser
+    public class OneCustomVariableLengthDelimiterParser : InputParser
     {
         public string Delimiter { get; private set; }
 
@@ -12,12 +12,12 @@ namespace CalculatorApp.Internal.Parsers.Concrete
         {
             List<int> numbers = new List<int>();
 
-            Regex regex = new Regex(@"\/\/(?'delimiter'.)\\n(?'numbers'.*)");
+            Regex regex = new Regex(@"\/\/\[(?'delimiter'.+)\]\\n(?'numbers'.*)");
             var match = regex.Match(input);
             Delimiter = match.Groups["delimiter"].Value;
             var inputNumbers = match.Groups["numbers"].Value;
 
-            // If no single char delimiter is provided, the input string is not of right format 
+            // If there is no even a single char delimiter is provided, the input string is not of right format 
             if (string.IsNullOrEmpty(Delimiter))
             {
                 return numbers;
