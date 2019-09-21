@@ -12,6 +12,7 @@ namespace CalculatorApp.Internal.Parsers.Concrete
         {
             List<int> numbers = new List<int>();
 
+            // e.g. //;\n2;5
             Regex regex = new Regex(@"\/\/(?'delimiter'.)\\n(?'numbers'.*)");
             var match = regex.Match(input);
             Delimiter = match.Groups["delimiter"].Value;
