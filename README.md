@@ -56,5 +56,46 @@ Calculator Challenge - Coding Practice
   * A final testing also makes sure all required formats are supported well:
   
       ![calculator stretch goal 2](https://i.ibb.co/LhTyN7F/calculator-stretch-2.png)
-      
+
+---
+### Notes for points that are not implemeted
+
+I don't want to make the app too overcomplicated with some more flexibility, as I hope readers can read less code to focus and get the main ideas/main flows  that accomplished the core requirements. Below are my thoughts if I would need to implement more...
+
+#### Strech goals
+**Stretch goal 3: Allow the acceptance of arguments to define...**
+
+    alternate delimiter in step #3
+    toggle whether to deny negative numbers in step #4
+    upper bound in step #5
+    
+  * For now, the DifferentDelimitersParser to support step #3 already exposed constructor to pass in the supported delimiters. It's not fixed, therefore client can totally pass whatever delimiters to make it work
+  * The validation at step #4 is materialized as an instance of INumberValidator. It's possible to ask user if he wants to include negative number. Then we can pass in either the currently used PositiveNumberValidator (if needs to deny negative numbers) or another BlankValidator (a validator that actually validate no rules - the IsValid method always returns true). The idea here is programming agains interface INumberValidator and pass the appropriate instance 
+  * Again for upper bound in step #5, the current implementation for excluding numbers greater than 1000 is using a INumberFilter. The same idea with INumberValidator, easily to pass in the appropriate instance filter according to specific need. The app can also be modified to accept multiple filters.
   
+**Stretch goal 4: Use DI**
+  * It's easy to configure DI using service provider for Console application. However, as the current app does not use too many interfaces (only an instance of INumberValidator and an instance of INumberFilter), I think it's not really a strong motivation to have DI at this phase. Later on, if DI is implemented, the chain of InputParser classes can also be converted to be injected with base class/interface and named service registration. For now, I want to keep all InputParser instances clear as much as possible so the reader can understand best the core idea
+  
+**Stretch goal 5: Support subtraction, multiplication, and division operations**
+  * Idea: can introduce a concept of operator as an interface. Then, adjust the current implementation with an AdditionOperator. The other possible operators are SubtractionOperator, MultiplicationOperator and DivisionOperator. The Calculator can just call the specific operator instance to have it calculate against the list of parsed numbers
+  
+#### Unit tests
+Honestly, the Calculator class itself, to be considered as a whole functional unit, can be implemented with all formula inputs supported by the requirements. However, I see it is somehow like an integration test as the Calculator is comprised of multiple internal parts (InputParser, Validator, Filter). Therefore, I decided not to do that way as it takes some time, though implementing an integration test is also good. Instead, I already made sure every other parts are well covered with unit tests.
+
+---
+
+
+  
+  
+  
+
+  
+    
+    
+
+
+
+
+
+
+
