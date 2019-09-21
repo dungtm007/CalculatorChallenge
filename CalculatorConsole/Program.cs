@@ -19,6 +19,7 @@ namespace CalculatorConsole
                 {
                     calculator.ReadInput();
                     calculator.Calculate();
+                    calculator.DisplayResult();
                 }
                 catch (Exception ex)
                 {

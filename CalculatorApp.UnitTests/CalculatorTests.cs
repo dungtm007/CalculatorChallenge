@@ -45,7 +45,7 @@ namespace CalculatorApp.UnitTests
             Calculator calculator = new Calculator(validator, filter);
             calculator.Input = "Test";
 
-            var sum = calculator.Calculate();
+            calculator.Calculate();
 
             filter.Received(1).Filter(Arg.Any<List<int>>());
         }

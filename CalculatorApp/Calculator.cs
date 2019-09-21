@@ -3,6 +3,7 @@ using CalculatorApp.Internal.Parsers.Abstract;
 using CalculatorApp.Internal.Parsers.Concrete;
 using CalculatorApp.Internal.Validators;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CalculatorApp
@@ -10,6 +11,8 @@ namespace CalculatorApp
     public class Calculator
     {
         public string Input { get; set; }
+        public List<int> ParsedNumbers { get; set; }
+        public int Result { get; set; }
 
         private InputParser _inputParser1;
         private InputParser _inputParser2;
@@ -59,13 +62,16 @@ namespace CalculatorApp
                     $"{_numberValidator.ViolatedConditionName}: {string.Join(',', _numberValidator.InvalidNumbers)}");
             }
 
-            var finalNumbers = _numberFilter.Filter(numbers);
+            ParsedNumbers = _numberFilter.Filter(numbers);
 
-            var sumResult = finalNumbers?.Sum() ?? 0;
+            Result = ParsedNumbers?.Sum() ?? 0;
 
-            Console.WriteLine($"Result: {sumResult}");
+            return Result;
+        }
 
-            return sumResult;
+        public void DisplayResult()
+        {
+            Console.WriteLine($"Result: {string.Join('+', ParsedNumbers)} = {Result}");
         }
     }
 }
