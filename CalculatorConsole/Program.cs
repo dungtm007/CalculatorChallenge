@@ -10,10 +10,7 @@ namespace CalculatorConsole
         static void Main(string[] args)
         {
             Calculator calculator = new Calculator(new PositiveNumberValidator(), new LessThanOrEqual1000NumberFilter());
-
-            char wantToRetry;
-
-            do
+            while (true)
             {
                 try
                 {
@@ -25,15 +22,7 @@ namespace CalculatorConsole
                 {
                     Console.WriteLine($"Exception: {ex.Message}");
                 }
-
-                Console.Write("Want to retry (n/N to stop; anything to continue)? ");
-                wantToRetry = Console.ReadKey().KeyChar;
             }
-            while (!wantToRetry.Equals('n') && !wantToRetry.Equals('N'));
-
-            Console.WriteLine();
-            Console.WriteLine("Exiting the program...");
-            Console.ReadKey();
         }
     }
 }
