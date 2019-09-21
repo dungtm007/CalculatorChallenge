@@ -36,6 +36,11 @@ Calculator Challenge - Coding Practice
   
      ![calculator requirement 6](https://i.ibb.co/dJXthSc/calculator-6.png)
      
-     
+  **7. Commit for requirement 7:** Support 1 custom delimiter of any length
+  * Also, fixed one crucial issue: in abstract InputParser, the call to NextInputParser should be ParseOrPassToNextInputParserIfNeeded
+  
+     ![calculator requirement 7](https://i.ibb.co/FDvxvqY/calculator-7.png)
+  
+  
      
   
