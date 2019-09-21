@@ -46,5 +46,11 @@ Calculator Challenge - Coding Practice
   
        ![calculator requirement 8](https://i.ibb.co/t48BTvm/calculator-8.png)
        
+  **Stretch goal 1. Commit for stretch goal 1:** Display the formula used to calculate the result e.g. 2,4,rrrr,1001,6 will return 2+4+0+0+6 = 12
+  * Added ParsedNumbers and Result properties to Calculator class. Then implemented a DisplayResult method to print the formula
      
+      ![calculator stretch goal 1](https://i.ibb.co/HHH0Vh8/calculator-stretch-1.png)
+      
+      
+      
   
