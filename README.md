@@ -41,6 +41,9 @@ Calculator Challenge - Coding Practice
   
      ![calculator requirement 7](https://i.ibb.co/FDvxvqY/calculator-7.png)
   
-  
+  **8. Commit for requirement 8:** Support multiple delimiters of any length
+    
+       ![calculator requirement 8](https://i.ibb.co/t48BTvm/calculator-8.png)
+       
      
   
